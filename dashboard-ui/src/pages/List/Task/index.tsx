@@ -8,8 +8,10 @@ import './index.module.less';
 import classnames from 'classnames';
 import CommonStyle from '../../../styles/common.module.less';
 import { AddIcon, Edit1Icon, HistoryIcon, PlayCircleStrokeIcon } from 'tdesign-icons-react';
+import { useNavigate } from 'react-router-dom';
 
 export const SelectTable = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const pageState = useAppSelector(selectTestTaskList);
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([0, 1]);
@@ -45,7 +47,9 @@ export const SelectTable = () => {
           }}
           onCancel={() => {}}
         />
-        <Button icon={<AddIcon />}>创建测试任务</Button>
+        <Button icon={<AddIcon />} onClick={() => navigate('edit')}>
+          创建测试任务
+        </Button>
       </Row>
       <Table
         loading={loading}
@@ -104,7 +108,7 @@ export const SelectTable = () => {
                       }}
                     ></Button>
                   </Tooltip>
-                  <Tooltip content="编辑">
+                  <Tooltip content='编辑'>
                     <Button
                       shape='circle'
                       icon={<Edit1Icon />}
