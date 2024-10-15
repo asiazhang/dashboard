@@ -14,7 +14,6 @@
   </a>
 </p>
 
-English | [简体中文](./README-zh_CN.md) 
 ### Introduction
 
 TDesign React Starter is a TDesign-based project developed with `React`, `Vite`. It can be customized theme configuration, and aims to provide project out-of-the-box, configuration-style middle and background projects.
