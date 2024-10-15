@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BaseTable, Input, Button, BaseTableCol } from 'tdesign-react';
+import { BaseTable, Input, Button, BaseTableCol, Space } from 'tdesign-react';
 
 interface EnvVariable {
   envName: string;
@@ -67,17 +67,19 @@ const EnvironmentEditor: React.FC = () => {
         <div style={{ width: '30%' }}>变量值</div>
         <div style={{ width: '30%' }}>操作</div>
       </div>
-      <BaseTable
-        rowKey='key'
-        data={envVariables}
-        columns={columns}
-        bordered={false}
-        showHeader={false}
-        disableDataPage={true}
-      />
-      <Button onClick={addVariable} style={{ marginBottom: '20px' }}>
-        添加变量
-      </Button>
+      <Space direction='vertical'>
+        <BaseTable
+          rowKey='key'
+          data={envVariables}
+          columns={columns}
+          bordered={false}
+          showHeader={false}
+          disableDataPage={true}
+        />
+        <Button onClick={addVariable} style={{ marginBottom: '20px' }}>
+          添加变量
+        </Button>
+      </Space>
     </div>
   );
 };
