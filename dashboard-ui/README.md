@@ -1,96 +1,36 @@
-<p style="display:flex; justify-content: center">
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-</p>
-<p align="center">
-  <a href="https://tdesign.tencent.com/starter/react/#/dashboard/base" target="_blank">
-    <img alt="TDesign Logo" width="200" src="https://tdesign.gtimg.com/starter/brand-logo.svg">
-  </a>
-</p>
+## Getting Started
 
-<p align="center">
-  <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatibility"></a>
-  <a href="https://github.com/Tencent/tdesign-react/blob/develop/LICENSE">
-    <img src="https://img.shields.io/npm/l/tdesign-react.svg?sanitize=true" alt="License">
-  </a>
-</p>
-
-### Introduction
-
-TDesign React Starter is a TDesign-based project developed with `React`, `Vite`. It can be customized theme configuration, and aims to provide project out-of-the-box, configuration-style middle and background projects.
-
-<p>
-  <a href="http://tdesign.tencent.com/starter/react/">Live Preview</a>
-  ·
-  <a href="https://tdesign.tencent.com/starter/docs/react/get-started">Documentation</a>
-</p>
-
-<img src="docs/docs-starter.png">
-
-### Features
-
-- Various provided pages for develop
-- Complete directory structure for develop
-- Code specification configuration
-- Support dark mode
-- Custom theme colors
-- Various space layouts
-- Mock data scheme
-
-### Usage
-
-> Initialize project with our CLI tool `tdesign-starter-cli` 
+First, run the development server:
 
 ```bash
-## install tdesign-starter-cli
-npm i tdesign-starter-cli@latest -g
-
-## create project
-td-starter init
-```
-
-### Develop
-
-```bash
-## install dependencies
-npm install
-
-## set up
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### Build
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-## build
-npm run build
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## build for test
-npm run build:test
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Learn More
 
-### Contributing Guide
+To learn more about Next.js, take a look at the following resources:
 
-We welcome contributions to our project. Create your [Issue](https://github.com/tencent/tdesign-react-starter/issues/new/choose) or Submit your [Pull Request](https://github.com/Tencent/tdesign-react-starter/pulls).
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-#### Pull Request
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-1. Fork it!
-2. Create your branch: `git checkout -b feat/xxxx`
-3. Commit: `git commit -a 'feat(project): describe'`
-4. Push: `git push origin feat/xxxx`
-5. New Pull Request `pull request`
+## Deploy on Vercel
 
-#### Commit Specification
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- [Angular Convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular)
-
-### Compatibility
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br> IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Edge >=84                                                                                                                                                                                                        | Firefox >=83                                                                                                                                                                                                      | Chrome >=84                                                                                                                                                                                                   | Safari >=14.1                                                                                                                                                                                                 |
-
-### License
-
-The MIT License. Please see [the license file](LICENSE) for more information.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
