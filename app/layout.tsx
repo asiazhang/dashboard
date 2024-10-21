@@ -5,10 +5,11 @@ import HeaderNav from '@/components/HeaderNav/HeaderNav';
 import Navigation from '@/components/Navigation/Navigation';
 import 'tdesign-react/dist/tdesign.css';
 import { Layout } from 'tdesign-react/lib';
+import Style from './layout.module.css';
 
-const { Content } = Layout;
+const { Content, Aside } = Layout;
 
-export default function RootLayout() {
+export default function RootLayout({ children }) {
   return (
     <html>
       <body>
@@ -16,7 +17,9 @@ export default function RootLayout() {
           <Layout>
             <HeaderNav></HeaderNav>
             <Layout>
-              <Navigation></Navigation>
+              <Aside style={{ borderTop: '1px solid var(--component-border)' }}>
+                <Navigation></Navigation>
+              </Aside>
               <Layout>
                 <Content>
                   <div>Content</div>
