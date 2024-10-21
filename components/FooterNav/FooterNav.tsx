@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Layout, Row } from 'tdesign-react/lib';
 
 const { Footer } = Layout;
@@ -12,4 +10,4 @@ const NavFooter = () => {
   );
 };
 
-export default React.memo(NavFooter);
+export default NavFooter;
