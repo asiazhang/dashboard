@@ -1,20 +1,10 @@
-import type { Action, ThunkAction } from '@reduxjs/toolkit';
-import { combineSlices, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
 // import global from './global';
 import { testImagesApiSlice } from './testImage/testImageSlice';
 import { testRecordsApiSlice } from './testRecord/testRecordSlice';
 import { testTasksApiSlice } from './testTask/testTaskSlice';
 import { testToolsApiSlice } from './testTool/testToolSlice';
-
-const rootReducer = combineSlices({
-  // global,
-  testImagesApiSlice,
-  testRecordsApiSlice,
-  testTasksApiSlice,
-  testToolsApiSlice,
-});
-export type RootState = ReturnType<typeof rootReducer>;
 
 // `makeStore` encapsulates the store configuration to allow
 // creating unique store instances, which is particularly important for
@@ -42,5 +32,5 @@ export const makeStore = () => {
 };
 
 export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];
-export type AppThunk<ThunkReturnType = void> = ThunkAction<ThunkReturnType, RootState, unknown, Action>;

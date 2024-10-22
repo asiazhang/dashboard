@@ -1,4 +1,3 @@
-import { selectGlobal } from '@/lib/global';
 import { NextRouter, useRouter } from 'next/router';
 import { memo, useState } from 'react';
 import { HistoryIcon, ListIcon, TaskIcon } from 'tdesign-icons-react';

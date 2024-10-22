@@ -9,16 +9,20 @@ import CommonStyle from '@/app/styles/common.module.css';
 import classnames from 'classnames';
 import { useRouter } from 'next/navigation';
 import { AddIcon, Edit1Icon, HistoryIcon, PlayCircleStrokeIcon } from 'tdesign-icons-react';
+import { ILogObj, Logger } from 'tslog';
 
-export const TaskTable = () => {
-  // const pageState = useAppSelector(selectTestTaskList);
+const log: Logger<ILogObj> = new Logger();
+
+const TaskTable = () => {
   const pageSize = 20;
   const pageIndex = 1;
   const { data, error, isLoading } = useGetTaskTasksQuery({ limit: pageSize, page: pageIndex });
+  if (error) {
+    log.warn(error);
+  }
+
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([0, 1]);
   const router = useRouter();
-  // const [visible, setVisible] = useState(false);
-  // const { loading, testTaskList, current, pageSize, total } = pageState;
 
   function onSelectChange(value: (string | number)[]) {
     setSelectedRowKeys(value);

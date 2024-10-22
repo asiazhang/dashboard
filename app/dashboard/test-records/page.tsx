@@ -8,6 +8,9 @@ import { useGetTaskRecordsQuery } from '@/lib/testRecord/testRecordSlice';
 import CommonStyle from '@/app/styles/common.module.css';
 import classnames from 'classnames';
 import { FilePasteIcon } from 'tdesign-icons-react';
+import { ILogObj, Logger } from 'tslog';
+
+const log: Logger<ILogObj> = new Logger();
 
 const StatusMap: {
   [key: string]: React.ReactElement;
@@ -41,13 +44,15 @@ const statusOptions = [
   { label: '已取消', value: 'cancel' },
 ];
 
-export const TestRecordsTable = () => {
+const TestRecordsTable = () => {
   const pageSize = 20;
   const pageIndex = 1;
   const { data, error, isLoading } = useGetTaskRecordsQuery({ limit: pageSize, page: pageIndex });
+  if (error) {
+    log.warn(error);
+  }
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([0, 1]);
-  const [visible, setVisible] = useState(false);
 
   function onSelectChange(value: (string | number)[]) {
     setSelectedRowKeys(value);

@@ -1,7 +1,6 @@
 module.exports = {
   root: true,
   extends: [
-    'airbnb-base',
     'prettier',
     'plugin:react/recommended',
     'plugin:import/typescript',
@@ -35,7 +34,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/order': 'off',
     'import/prefer-default-export': 'off',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'react/react-in-jsx-scope': 'off',
     // 关闭variable必须全部大写规则
     '@typescript-eslint/naming-convention': [
       'error',

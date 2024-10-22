@@ -18,7 +18,7 @@ export type SearchFormProps = {
   onSubmit: (values: FormValueType) => Promise<void>;
 };
 
-const SearchForm: React.FC<SearchFormProps> = (props) => {
+const SearchForm: React.FC<SearchFormProps> = () => {
   const formRef = useRef<FormInstanceFunctions>();
   const onSubmit = (e: SubmitContext) => {
     if (e.validateResult === true) {

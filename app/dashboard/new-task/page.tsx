@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useState } from 'react';
+import { memo, useState, MouseEvent } from 'react';
 import { Button, Form, Input, InputNumber, InputNumberValue, Select, Space } from 'tdesign-react';
 
 import CommonStyle from '@/app/styles/common.module.css';
@@ -9,12 +9,14 @@ import classnames from 'classnames';
 import { SelectValue } from 'tdesign-react/lib';
 import EnvEditor from './components/EnvEditor';
 import TooltipLabel from './components/TooltipLabel';
+import { ILogObj, Logger } from 'tslog';
 
 const { FormItem } = Form;
+const log: Logger<ILogObj> = new Logger();
 
 const NewTask = () => {
   const [value, setValue] = useState<SelectValue | null>(null);
-  const onChange = (value: SelectValue) => {
+  const ontestImageChange = (value: SelectValue) => {
     setValue(value);
   };
 
@@ -32,12 +34,19 @@ const NewTask = () => {
 
   // 工具下拉菜单
   const { data, error, isLoading } = useGetTestToolsQuery({});
+  if (error) {
+    log.warn(error);
+  }
 
   // 将 tools 数据转换为 Select 组件所需的格式
   const options = data?.tools.map((tool) => ({
     label: tool.nameZh,
     value: tool.name,
   }));
+
+  const submitNewTask = (e: MouseEvent<HTMLElement>) => {
+    log.debug(`submit ${e} testImage=${value} conc=${concurrencyValue} retry=${retryCountValue}`);
+  };
 
   return (
     <>
@@ -49,7 +58,7 @@ const NewTask = () => {
         <FormItem label={<TooltipLabel label='镜像库' tooltip='提示信息' />} name='testImage'>
           <Select
             style={{ width: '360px' }}
-            onChange={onChange}
+            onChange={ontestImageChange}
             clearable
             options={[
               { label: '架构云', value: '1', title: '架构云选项' },
@@ -93,7 +102,9 @@ const NewTask = () => {
       </Form>
 
       <Space>
-        <Button theme='primary'>提交</Button>
+        <Button theme='primary' onClick={submitNewTask}>
+          提交
+        </Button>
         <Button theme='default'>取消</Button>
       </Space>
     </>

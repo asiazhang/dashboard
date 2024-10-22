@@ -12,7 +12,7 @@ import { AddIcon } from 'tdesign-icons-react';
 
 const log: Logger<ILogObj> = new Logger();
 
-export const SelectTable = () => {
+const SelectTable = () => {
   const pageSize = 20;
   const pageIndex = 1;
   const { data, error, isLoading } = useGetTestImagesQuery({ limit: pageSize, page: pageIndex });

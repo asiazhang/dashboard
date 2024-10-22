@@ -2,7 +2,7 @@
 import { memo, useState } from 'react';
 import { Select, SelectValue } from 'tdesign-react';
 
-export default memo((props: {}) => {
+export default memo(() => {
   const [value, setValue] = useState('');
   const onChange = (value: SelectValue) => {
     setValue(value.toString());

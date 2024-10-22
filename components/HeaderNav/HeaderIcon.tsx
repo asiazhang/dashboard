@@ -1,11 +1,8 @@
-import React, { memo } from 'react';
-import { Button, Popup, Badge, Dropdown, Space } from 'tdesign-react';
-import { Icon, SettingIcon, PoweroffIcon, UserCircleIcon } from 'tdesign-icons-react';
-// import { useAppDispatch } from '@/lib/store';
-import { toggleSetting } from '@/lib/global';
-// import { logout } from '@/lib/user';
-import Style from './HeaderIcon.module.css';
 import { useRouter } from 'next/navigation';
+import { memo } from 'react';
+import { Icon, PoweroffIcon, SettingIcon, UserCircleIcon } from 'tdesign-icons-react';
+import { Button, Dropdown, Popup, Space } from 'tdesign-react';
+import Style from './HeaderIcon.module.css';
 
 const { DropdownMenu, DropdownItem } = Dropdown;
 
