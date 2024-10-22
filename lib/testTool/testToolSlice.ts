@@ -25,14 +25,13 @@ const initialState: IInitialState = {
 // Define a service using a base URL and expected endpoints
 export const testToolsApiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      'https://proxy.cors.sh/https://testsolar-1321258242.cos.ap-guangzhou.myqcloud.com/testtools/stable.index.json',
+    baseUrl: 'https://proxy.cors.sh',
   }),
   reducerPath: 'testToolsApi',
   tagTypes: ['testTools'],
   endpoints: (build) => ({
     getTestTools: build.query<TestToolMetaInfo, any>({
-      query: () => ``,
+      query: () => `https://testsolar-1321258242.cos.ap-guangzhou.myqcloud.com/testtools/stable.index.json`,
     }),
   }),
 });

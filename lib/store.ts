@@ -1,14 +1,14 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit';
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
 
-import global from './global';
+// import global from './global';
 import { testImagesApiSlice } from './testImage/testImageSlice';
 import { testRecordsApiSlice } from './testRecord/testRecordSlice';
 import { testTasksApiSlice } from './testTask/testTaskSlice';
 import { testToolsApiSlice } from './testTool/testToolSlice';
 
 const rootReducer = combineSlices({
-  global,
+  // global,
   testImagesApiSlice,
   testRecordsApiSlice,
   testTasksApiSlice,
@@ -22,7 +22,12 @@ export type RootState = ReturnType<typeof rootReducer>;
 // are needed for each request to prevent cross-request state pollution.
 export const makeStore = () => {
   return configureStore({
-    reducer: rootReducer,
+    reducer: {
+      [testImagesApiSlice.reducerPath]: testImagesApiSlice.reducer,
+      [testRecordsApiSlice.reducerPath]: testRecordsApiSlice.reducer,
+      [testTasksApiSlice.reducerPath]: testTasksApiSlice.reducer,
+      [testToolsApiSlice.reducerPath]: testToolsApiSlice.reducer,
+    },
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) => {

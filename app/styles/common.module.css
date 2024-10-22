@@ -1,7 +1,6 @@
 .pageWithPadding {
   padding: 30px 32px;
 }
-
 .pageWithColor {
   background: var(--td-bg-color-container);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);

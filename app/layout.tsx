@@ -4,5 +4,11 @@ import SharedLayout, { MyLayoutProps } from '@/components/SharedLayout/SharedLay
 import 'tdesign-react/dist/tdesign.css';
 
 export default function RootLayout({ children }: MyLayoutProps) {
-  return <SharedLayout>{children}</SharedLayout>;
+  return (
+    <html>
+      <body>
+        <SharedLayout>{children}</SharedLayout>
+      </body>
+    </html>
+  );
 }

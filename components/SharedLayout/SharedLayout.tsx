@@ -15,24 +15,18 @@ export interface MyLayoutProps {
 
 const SharedLayout = ({ children }: MyLayoutProps) => {
   return (
-    <html>
-      <body>
-        <>
-          <Layout>
-            <HeaderNav></HeaderNav>
-            <Layout>
-              <Aside style={{ borderTop: '1px solid var(--component-border)' }}>
-                <Navigation></Navigation>
-              </Aside>
-              <Layout>
-                <Content>{children}</Content>
-                <FooterNav></FooterNav>
-              </Layout>
-            </Layout>
-          </Layout>
-        </>
-      </body>
-    </html>
+    <Layout>
+      <HeaderNav></HeaderNav>
+      <Layout>
+        <Aside style={{ borderTop: '1px solid var(--component-border)' }}>
+          <Navigation></Navigation>
+        </Aside>
+        <Layout>
+          <Content>{children}</Content>
+          <FooterNav></FooterNav>
+        </Layout>
+      </Layout>
+    </Layout>
   );
 };
 
