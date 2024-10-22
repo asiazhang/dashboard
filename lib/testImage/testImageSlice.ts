@@ -19,7 +19,7 @@ const log: Logger<ILogObj> = new Logger();
 
 // Define a service using a base URL and expected endpoints
 export const testImagesApiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: 'mockData' }),
+  baseQuery: fetchBaseQuery({ baseUrl: '/mockData' }),
   reducerPath: 'testImageApi',
   tagTypes: ['testImages'],
   endpoints: (build) => ({
