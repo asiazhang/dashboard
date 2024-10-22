@@ -35,6 +35,7 @@ export const makeStore = () => {
         testImagesApiSlice.middleware,
         testRecordsApiSlice.middleware,
         testTasksApiSlice.middleware,
+        testToolsApiSlice.middleware,
       );
     },
   });

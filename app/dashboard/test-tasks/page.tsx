@@ -37,7 +37,7 @@ export const TaskTable = () => {
           }}
           onCancel={() => {}}
         />
-        <Button icon={<AddIcon />} onClick={() => router.push('edit')}>
+        <Button icon={<AddIcon />} onClick={() => router.push('/dashboard/new-task')}>
           创建测试任务
         </Button>
       </Row>

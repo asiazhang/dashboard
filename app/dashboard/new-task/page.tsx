@@ -1,19 +1,20 @@
-import { memo, useEffect, useState } from 'react';
-import { Input, Form, Select, InputNumber, InputNumberValue, SelectOption, Button, Space } from 'tdesign-react';
+'use client';
 
-import './index.module.less';
+import { memo, useState } from 'react';
+import { Button, Form, Input, InputNumber, InputNumberValue, Select, Space } from 'tdesign-react';
+
+import CommonStyle from '@/app/styles/common.module.css';
+import { useGetTestToolsQuery } from '@/lib/testTool/testToolSlice';
 import classnames from 'classnames';
-import CommonStyle from '../../styles/common.module.less';
-import TooltipLabel from './components/TooltipLabel';
+import { SelectValue } from 'tdesign-react/lib';
 import EnvEditor from './components/EnvEditor';
-import { useAppDispatch, useAppSelector } from '@/lib/store';
-import { selectToolList, getToolList } from '@/lib/list/testTool';
+import TooltipLabel from './components/TooltipLabel';
 
 const { FormItem } = Form;
 
-export const NewTask = () => {
-  const [value, setValue] = useState<SelectOption>('');
-  const onChange = (value: SelectOption) => {
+const NewTask = () => {
+  const [value, setValue] = useState<SelectValue | null>(null);
+  const onChange = (value: SelectValue) => {
     setValue(value);
   };
 
@@ -30,24 +31,13 @@ export const NewTask = () => {
   };
 
   // 工具下拉菜单
-  const dispatch = useAppDispatch();
-  const testToolState = useAppSelector(selectToolList);
-  const { loading, toolList } = testToolState;
-
-  useEffect(() => {
-    if (toolList.length == 0) {
-      dispatch(getToolList());
-    }
-  }, [dispatch, toolList.length]);
+  const { data, error, isLoading } = useGetTestToolsQuery({});
 
   // 将 tools 数据转换为 Select 组件所需的格式
-  const options = toolList.map((tool) => ({
+  const options = data?.tools.map((tool) => ({
     label: tool.nameZh,
     value: tool.name,
   }));
-
-  // 环境变量数据
-  const [envDatas, setEnvDatas] = useState();
 
   return (
     <>
@@ -94,7 +84,7 @@ export const NewTask = () => {
         </FormItem>
 
         <FormItem label='测试工具' name='toolName'>
-          <Select style={{ width: '200px' }} clearable loading={loading} options={options} />
+          <Select style={{ width: '200px' }} clearable loading={isLoading} options={options || []} />
         </FormItem>
 
         <FormItem label='环境变量' name='envs'>
