@@ -1,13 +1,13 @@
 'use client';
 
+import { useGetTestImagesQuery } from '@/lib/testImage/testImageSlice';
 import React, { useState } from 'react';
 import { Button, Row, Table, Tag } from 'tdesign-react';
-import { useGetTestImagesQuery } from '@/lib/testImage/testImageSlice';
+import { ILogObj, Logger } from 'tslog';
 import SearchForm, { FormValueType } from './components/SearchForm';
-import { Logger, ILogObj } from 'tslog';
 
-import classnames from 'classnames';
 import CommonStyle from '@/app/styles/common.module.css';
+import classnames from 'classnames';
 import { AddIcon } from 'tdesign-icons-react';
 
 const log: Logger<ILogObj> = new Logger();
@@ -30,9 +30,6 @@ export const SelectTable = () => {
   function rehandleClickOp(record: any) {
     console.log(record);
   }
-
-  // if (isLoading) return <p>Loading...</p>;
-  // if (error) return <p>Error loading quotes</p>;
 
   return (
     <>
