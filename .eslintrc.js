@@ -5,6 +5,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/typescript',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@next/next/recommended',
   ],
   plugins: ['eslint-plugin-prettier'],
   parser: '@typescript-eslint/parser',

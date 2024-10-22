@@ -26,6 +26,7 @@
     "tvision-color": "^1.6.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^15.0.0",
     "@types/lodash": "^4.17.10",
     "@types/node": "^20",
     "@types/react": "^18",

@@ -1,8 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
-import { memo, useState } from 'react';
+import { memo, ReactElement, useState } from 'react';
 import { HistoryIcon, ListIcon, TaskIcon } from 'tdesign-icons-react';
 import { Menu, MenuValue } from 'tdesign-react';
-import { TNode } from 'tdesign-react/lib/common';
 import Style from './Menu.module.css';
 import MenuLogo from './MenuLogo';
 
@@ -15,31 +14,29 @@ interface IMenuProps {
 
 interface NaviMenu {
   label: string;
-  icon: TNode;
+  icon: ReactElement;
   link: string;
 }
 
 const leftMenues: NaviMenu[] = [
   {
     label: '镜像库',
-    icon: ListIcon,
+    icon: <ListIcon />,
     link: 'registry',
   },
   {
     label: '测试任务',
-    icon: TaskIcon,
+    icon: <TaskIcon />,
     link: 'tasks',
   },
   {
     label: '执行记录',
-    icon: HistoryIcon,
+    icon: <HistoryIcon />,
     link: 'records',
   },
 ];
 
 const renderMenuItems = (router: NextRouter) => {
-  // const navigate = useNavigate();
-  // const router = useRouter();
   return leftMenues.map((item) => {
     const { label, icon, link } = item;
 
