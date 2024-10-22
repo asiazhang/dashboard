@@ -26,24 +26,16 @@ interface TestRecordApiResponse {
 
 const log: Logger<ILogObj> = new Logger();
 
-const baseUrl =
-  process.env.NODE_ENV === 'development'
-    ? '/mockData' // 开发环境使用本地文件
-    : 'https://dummyjson.com/'; // 生产环境使用线上 API
-
 // Define a service using a base URL and expected endpoints
 export const testRecordsApiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: '/mockData' }),
   reducerPath: 'testRecordApi',
   tagTypes: ['testRecords'],
   endpoints: (build) => ({
     getTaskRecords: build.query<TestRecordApiResponse, { limit?: number; page?: number }>({
       query: ({ limit = 20, page = 1 }) => {
-        if (process.env.NODE_ENV === 'development') {
-          return 'records.json';
-        } else {
-          return `records?limit=${limit}&page=${page}`;
-        }
+        log.debug(`current use mock data only, limit=${limit}, page=${page}`);
+        return 'records.json';
       },
       providesTags: (result, error, { limit, page }) =>
         result ? [{ type: 'testRecords', id: `PAGE_${page}_LIMIT_${limit}` }] : [],

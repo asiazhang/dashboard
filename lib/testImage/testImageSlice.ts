@@ -17,31 +17,22 @@ interface TestImageApiResponse {
 
 const log: Logger<ILogObj> = new Logger();
 
-const baseUrl =
-  process.env.NODE_ENV === 'development'
-    ? '/mockData' // 开发环境使用本地文件
-    : 'https://dummyjson.com/'; // 生产环境使用线上 API
-
 // Define a service using a base URL and expected endpoints
 export const testImagesApiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'mockData' }),
   reducerPath: 'testImageApi',
   tagTypes: ['testImages'],
   endpoints: (build) => ({
     getTestImages: build.query<TestImageApiResponse, { limit?: number; page?: number }>({
       query: ({ limit = 20, page = 1 }) => {
-        if (process.env.NODE_ENV === 'development') {
-          return 'images.json';
-        } else {
-          return `images?limit=${limit}&page=${page}`;
-        }
+        log.debug(`current use mock data only, limit=${limit}, page=${page}`);
+        return 'images.json';
       },
       providesTags: (result, error, { limit, page }) =>
         result ? [{ type: 'testImages', id: `PAGE_${page}_LIMIT_${limit}` }] : [],
       transformResponse: (response: any) => {
-        // 检查返回的数据结构
         log.info(response);
-        return response; // 确保你返回了处理后的数据
+        return response;
       },
     }),
   }),
