@@ -21,10 +21,6 @@ const baseUrl =
   process.env.NODE_ENV === 'development'
     ? '/mockData' // 开发环境使用本地文件
     : 'https://dummyjson.com/'; // 生产环境使用线上 API
-const query =
-  process.env.NODE_ENV === 'development'
-    ? 'images.json' // 开发环境使用本地文件
-    : 'https://dummyjson.com/'; // 生产环境使用线上 API
 
 // Define a service using a base URL and expected endpoints
 export const testTasksApiSlice = createApi({
