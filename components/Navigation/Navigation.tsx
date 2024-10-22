@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { Menu } from 'tdesign-react';
-import { HistoryIcon, TaskIcon, ViewListIcon } from 'tdesign-icons-react';
+import { FormIcon, HistoryIcon, TaskIcon } from 'tdesign-icons-react';
 import { useRouter } from 'next/navigation';
 
 const { MenuItem } = Menu;
@@ -17,7 +17,7 @@ const NavAside = () => {
 
   return (
     <Menu theme='light' value='dashboard' style={{ marginRight: 50, height: 550 }}>
-      <MenuItem value='dashboard' icon={<ViewListIcon />} onClick={() => routeTo('/dashboard/test-images')}>
+      <MenuItem value='dashboard' icon={<FormIcon />} onClick={() => routeTo('/dashboard/test-images')}>
         镜像库
       </MenuItem>
       <MenuItem value='resource' icon={<TaskIcon />} onClick={() => routeTo('/dashboard/test-tasks')}>
