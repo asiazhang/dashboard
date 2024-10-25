@@ -3,15 +3,11 @@
 import FooterNav from '@/components/FooterNav/FooterNav';
 import HeaderNav from '@/components/HeaderNav/HeaderNav';
 import Navigation from '@/components/Navigation/Navigation';
-import { ReactNode } from 'react';
 import 'tdesign-react/dist/tdesign.css';
-import { Layout } from 'tdesign-react/lib';
+import {Layout} from 'tdesign-react/lib';
+import {MyLayoutProps} from "@/app/lib/common";
 
 const { Content, Aside } = Layout;
-
-export interface MyLayoutProps {
-  children: ReactNode; // ReactNode 是表示任意可渲染内容的类型
-}
 
 const SharedLayout = ({ children }: MyLayoutProps) => {
   return (
