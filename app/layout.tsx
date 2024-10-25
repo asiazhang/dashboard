@@ -1,14 +1,11 @@
-'use client';
-
-import SharedLayout, { MyLayoutProps } from '@/components/SharedLayout/SharedLayout';
 import 'tdesign-react/dist/tdesign.css';
+import { MyLayoutProps } from '@/app/lib/common';
 
-export default function RootLayout({ children }: MyLayoutProps) {
+export default async function RootLayout({ children }: MyLayoutProps) {
+
   return (
     <html>
-      <body>
-        <SharedLayout>{children}</SharedLayout>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
