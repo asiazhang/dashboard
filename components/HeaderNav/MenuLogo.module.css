@@ -6,6 +6,8 @@
   align-items: center;
   cursor: pointer;
   color: var(--td-text-color-primary);
+  background: #2c3243;
+  margin-left: 0 !important;
 }
 .menuMiniLogo {
   width: 28px;

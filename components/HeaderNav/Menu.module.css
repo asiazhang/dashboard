@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100%;
 }
+
 .menuTip {
   color: var(--td-text-color-primary);
   opacity: 0.4;

@@ -73,7 +73,7 @@ export default memo(() => {
 
   return (
     <Menu
-      style={{ flexShrink: 0, height: '100%' }}
+      className={Style.menuPanel}
       value={router.pathname}
       theme={'dark'}
       operations={<div className={Style.menuTip}>{bottomText}</div>}

@@ -19,7 +19,6 @@ const SharedLayout = ({ children }: MyLayoutProps) => {
       <Layout>
         <HeaderNav></HeaderNav>
         <Content>{children}</Content>
-        <FooterNav></FooterNav>
       </Layout>
     </Layout>
   );
