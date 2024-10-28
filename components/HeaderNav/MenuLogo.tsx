@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import Style from './Menu.module.css';
+import Style from './MenuLogo.module.css';
 import Image from 'next/image';
 import FullLogo from '@/public/svg/assets-logo-full.svg';
 import MiniLogo from '@/public/svg/assets-t-logo.svg';

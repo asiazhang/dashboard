@@ -13,15 +13,13 @@ const { Content, Aside } = Layout;
 const SharedLayout = ({ children }: MyLayoutProps) => {
   return (
     <Layout className={Style.panel}>
-      <HeaderNav></HeaderNav>
+      <Aside>
+        <Navigation></Navigation>
+      </Aside>
       <Layout>
-        <Aside style={{ borderTop: '1px solid var(--component-border)' }}>
-          <Navigation></Navigation>
-        </Aside>
-        <Layout>
-          <Content>{children}</Content>
-          <FooterNav></FooterNav>
-        </Layout>
+        <HeaderNav></HeaderNav>
+        <Content>{children}</Content>
+        <FooterNav></FooterNav>
       </Layout>
     </Layout>
   );

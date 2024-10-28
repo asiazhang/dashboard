@@ -5,6 +5,7 @@ import React from 'react';
 import { Menu } from 'tdesign-react';
 import { FormIcon, HistoryIcon, TaskIcon } from 'tdesign-icons-react';
 import { useRouter } from 'next/navigation';
+import MenuLogo from '@/components/HeaderNav/MenuLogo';
 
 const { MenuItem } = Menu;
 
@@ -16,7 +17,7 @@ const NavAside = () => {
   };
 
   return (
-    <Menu theme='light' value='dashboard' style={{ marginRight: 50, height: 550 }}>
+    <Menu theme='dark' value='dashboard' logo={<MenuLogo collapsed={false} />} style={{ height: '100%' }}>
       <MenuItem value='dashboard' icon={<FormIcon />} onClick={() => routeTo('/dashboard/test-images')}>
         镜像库
       </MenuItem>
