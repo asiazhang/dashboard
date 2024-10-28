@@ -1,6 +1,5 @@
 'use client';
 
-import 'tdesign-react/es/style/index.css';
 import './styles/index.css';
 
 export default function indexPage() {
@@ -12,5 +11,4 @@ export default function indexPage() {
       <link rel='icon' href='/favicon.ico' />
     </>
   );
-  // return <App />;
 }
