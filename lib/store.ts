@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// import global from './global';
+import globalReducer from './global/index';
 import { testImagesApiSlice } from './testImage/testImageSlice';
 import { testRecordsApiSlice } from './testRecord/testRecordSlice';
 import { testTasksApiSlice } from './testTask/testTaskSlice';
@@ -13,6 +13,7 @@ import { testToolsApiSlice } from './testTool/testToolSlice';
 export const makeStore = () => {
   return configureStore({
     reducer: {
+      global: globalReducer,
       [testImagesApiSlice.reducerPath]: testImagesApiSlice.reducer,
       [testRecordsApiSlice.reducerPath]: testRecordsApiSlice.reducer,
       [testTasksApiSlice.reducerPath]: testTasksApiSlice.reducer,

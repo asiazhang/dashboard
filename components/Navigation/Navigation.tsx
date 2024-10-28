@@ -1,16 +1,20 @@
 'use client';
 
 import React, { useState } from 'react';
-
-import { Menu, MenuValue } from 'tdesign-react';
-import { FormIcon, HistoryIcon, SettingIcon, TaskIcon } from 'tdesign-icons-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Button, Menu, MenuValue } from 'tdesign-react';
+import { FormIcon, HistoryIcon, MenuFoldIcon, SettingIcon, TaskIcon } from 'tdesign-icons-react';
 import { useRouter } from 'next/navigation';
 import MenuLogo from '@/components/HeaderNav/MenuLogo';
+import { RootState } from '@/lib/store';
+import { toggleMenu } from '@/lib/global/index';
 
 const { MenuItem } = Menu;
 
 const NavAside = () => {
   const router = useRouter();
+  const collapsed: boolean = useSelector((state: RootState) => state.global.collapsed);
+  const dispatch = useDispatch();
 
   const [active, setActive] = useState<MenuValue>('0');
 
@@ -22,8 +26,18 @@ const NavAside = () => {
     <Menu
       theme='dark'
       value={active}
+      collapsed={collapsed}
       onChange={(v) => setActive(v)}
       logo={<MenuLogo collapsed={false} />}
+      operations={
+        <Button
+          shape='square'
+          size='large'
+          variant='text'
+          onClick={() => dispatch(toggleMenu(null))}
+          icon={<MenuFoldIcon />}
+        ></Button>
+      }
       style={{ height: '100%' }}
     >
       <MenuItem value='images' icon={<FormIcon />} onClick={() => routeTo('/dashboard/test-images')}>
