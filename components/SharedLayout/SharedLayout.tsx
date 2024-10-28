@@ -1,7 +1,6 @@
 'use client';
 
 import { MyLayoutProps } from '@/app/lib/common';
-import FooterNav from '@/components/FooterNav/FooterNav';
 import HeaderNav from '@/components/HeaderNav/HeaderNav';
 import Navigation from '@/components/Navigation/Navigation';
 import 'tdesign-react/dist/tdesign.css';
