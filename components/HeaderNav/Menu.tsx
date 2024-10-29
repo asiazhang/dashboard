@@ -6,12 +6,6 @@ import Style from './Menu.module.css';
 import MenuLogo from './MenuLogo';
 
 const { MenuItem, HeadMenu } = Menu;
-
-interface IMenuProps {
-  showLogo?: boolean;
-  showOperation?: boolean;
-}
-
 interface NaviMenu {
   label: string;
   icon: ReactElement;
@@ -47,11 +41,7 @@ const renderMenuItems = (router: NextRouter) => {
     );
   });
 };
-
-/**
- * 顶部菜单
- */
-export const HeaderMenu = memo(() => {
+memo(() => {
   // const globalState = useAppSelector(selectGlobal);
   const router = useRouter();
   const [active, setActive] = useState<MenuValue>(router.pathname); // todo
@@ -62,7 +52,6 @@ export const HeaderMenu = memo(() => {
     </HeadMenu>
   );
 });
-
 /**
  * 左侧菜单
  */
