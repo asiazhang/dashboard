@@ -19,3 +19,20 @@ code {
 .t-menu__item.t-is-active {
   background-color: #3e435a !important;
 }
+
+.t-default-menu__inner .t-menu__logo:not(:empty) {
+  box-sizing: border-box;
+  border-bottom: 0 solid !important;
+}
+
+.t-default-menu .t-menu__operations:not(:empty) {
+  height: 50px;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  text-align: left;
+  border-top: solid 0 !important;
+  box-sizing: border-box;
+  background-color: #2c3243 !important;
+}

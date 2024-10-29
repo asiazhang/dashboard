@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Button, Menu, MenuValue } from 'tdesign-react';
-import { FormIcon, HistoryIcon, MenuFoldIcon, SettingIcon, TaskIcon } from 'tdesign-icons-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Menu, MenuValue, Tooltip } from 'tdesign-react';
+import { FormIcon, HistoryIcon, SettingIcon, TaskIcon } from 'tdesign-icons-react';
 import { useRouter } from 'next/navigation';
 import MenuLogo from '@/components/HeaderNav/MenuLogo';
 import { RootState } from '@/lib/store';
-import { toggleMenu } from '@/lib/global/index';
+import { toggleMenu } from '@/lib/global';
+import OperationLogo from './OperationLogo';
 
 const { MenuItem } = Menu;
 
@@ -28,15 +29,17 @@ const NavAside = () => {
       value={active}
       collapsed={collapsed}
       onChange={(v) => setActive(v)}
-      logo={<MenuLogo collapsed={false} />}
+      logo={<MenuLogo collapsed={collapsed} />}
       operations={
-        <Button
-          shape='square'
-          size='large'
-          variant='text'
-          onClick={() => dispatch(toggleMenu(null))}
-          icon={<MenuFoldIcon />}
-        ></Button>
+        <Tooltip content='收起' destroyOnClose>
+          <Button
+            shape='square'
+            size='large'
+            variant='text'
+            onClick={() => dispatch(toggleMenu(null))}
+            icon={<OperationLogo />}
+          ></Button>
+        </Tooltip>
       }
       style={{ height: '100%' }}
     >
