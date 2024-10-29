@@ -4,9 +4,40 @@ import { Logger, ILogObj } from 'tslog';
 const log: Logger<ILogObj> = new Logger();
 const prisma = new PrismaClient();
 async function seed() {
+  await seedProjects();
   await seedUsers();
   await seedTestImages();
   await seedTestTasks();
+}
+
+async function seedProjects() {
+  log.debug('seeding projects');
+
+  const project1 = await prisma.project.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      name: '架构云',
+    },
+  });
+
+  const project2 = await prisma.project.upsert({
+    where: { id: 2 },
+    update: {},
+    create: {
+      name: '大数据',
+    },
+  });
+
+  const project3 = await prisma.project.upsert({
+    where: { id: 3 },
+    update: {},
+    create: {
+      name: '区块链',
+    },
+  });
+
+  log.debug(project1, project2, project3);
 }
 
 async function seedUsers() {
@@ -18,6 +49,24 @@ async function seedUsers() {
       nameEn: 'pinhenzhang',
       name: '张恒',
       email: 'pinhenzhang@tencent.com',
+      projects: {
+        create: [
+          {
+            project: {
+              connect: {
+                id: 1,
+              },
+            },
+          },
+          {
+            project: {
+              connect: {
+                id: 2,
+              },
+            },
+          },
+        ],
+      },
     },
   });
 
@@ -28,6 +77,24 @@ async function seedUsers() {
       nameEn: 'zixingdeng',
       name: '邓子星',
       email: 'zixingdeng@tencent.com',
+      projects: {
+        create: [
+          {
+            project: {
+              connect: {
+                id: 1,
+              },
+            },
+          },
+          {
+            project: {
+              connect: {
+                id: 3,
+              },
+            },
+          },
+        ],
+      },
     },
   });
 
@@ -38,6 +105,24 @@ async function seedUsers() {
       nameEn: 'dontezhang',
       name: '张磊',
       email: 'dontezhang@tencent.com',
+      projects: {
+        create: [
+          {
+            project: {
+              connect: {
+                id: 2,
+              },
+            },
+          },
+          {
+            project: {
+              connect: {
+                id: 3,
+              },
+            },
+          },
+        ],
+      },
     },
   });
 
@@ -56,8 +141,10 @@ async function seedTestImages() {
   const image1 = await prisma.testImage.create({
     data: {
       name: 'tcr.tencent.cloud.com/party/taas/native/demo',
+      toolName: 'pytest',
       userId: 1,
       count: 5,
+      projectId: 1,
     },
   });
   const image2 = await prisma.testImage.create({
@@ -65,17 +152,30 @@ async function seedTestImages() {
       name: 'tcr.tencent.cloud.com/party/taas/fastly',
       userId: 3,
       count: 7,
+      toolName: 'ginkgo',
+      projectId: 1,
     },
   });
   const image3 = await prisma.testImage.create({
     data: {
       name: 'tcr.tencent.cloud.com/party/taas/pytest',
-      userId: 2,
+      userId: 1,
       count: 4,
+      toolName: 'pytest',
+      projectId: 1,
+    },
+  });
+  const image4 = await prisma.testImage.create({
+    data: {
+      name: 'tcr.tencent.cloud.com/party/taas/jest-demo',
+      userId: 2,
+      count: 0,
+      toolName: 'jest',
+      projectId: 1,
     },
   });
 
-  log.debug(image1, image2, image3);
+  log.debug(image1, image2, image3, image4);
 }
 
 async function seedTestTasks() {
@@ -91,6 +191,7 @@ async function seedTestTasks() {
     data: {
       name: 'TestSolar Dashboard E2E 自动化测试（定时验收）',
       userId: 1,
+      projectId: 1,
     },
   });
 
@@ -98,6 +199,7 @@ async function seedTestTasks() {
     data: {
       name: 'NAT测试(IPv6-广州)',
       userId: 2,
+      projectId: 1,
     },
   });
 
@@ -105,10 +207,19 @@ async function seedTestTasks() {
     data: {
       name: 'AI评估测试-(OpenAI/混元/千问/Claude/Gemini)',
       userId: 2,
+      projectId: 1,
     },
   });
 
-  log.debug(task1, task2, task3);
+  const task4 = await prisma.testTask.create({
+    data: {
+      name: 'AI评估测试-(OpenAI/混元/千问/Claude/Gemini)',
+      userId: 1,
+      projectId: 2,
+    },
+  });
+
+  log.debug(task1, task2, task3, task4);
 }
 
 seed()

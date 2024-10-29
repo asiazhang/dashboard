@@ -2,24 +2,33 @@
 
 import { useGetTestImagesQuery } from '@/lib/testImage/testImageSlice';
 import React, { useState } from 'react';
-import { Button, Row, Table, Tag } from 'tdesign-react';
+import { Button, Input, Row, Select, Space, Table, Tag } from 'tdesign-react';
 import { ILogObj, Logger } from 'tslog';
-import SearchForm, { FormValueType } from './components/SearchForm';
 
 import CommonStyle from '@/app/styles/common.module.css';
 import classnames from 'classnames';
-import { AddIcon } from 'tdesign-icons-react';
+import { AddIcon, File1Icon, SearchIcon } from 'tdesign-icons-react';
+import { useGetTestToolsQuery } from '@/lib/testTool/testToolSlice';
 
 const log: Logger<ILogObj> = new Logger();
 
 const SelectTable = () => {
   const pageSize = 20;
   const pageIndex = 1;
-  const { data, error, isLoading } = useGetTestImagesQuery({ limit: pageSize, page: pageIndex });
+  const {
+    data: imageData,
+    error: imageError,
+    isLoading: isImageLoading,
+  } = useGetTestImagesQuery({ limit: pageSize, page: pageIndex });
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([0, 1]);
 
-  log.info(`error is ${error}`);
-  log.info(`data is ${data}`);
+  const { data: toolData, error: toolError, isLoading: isToolLoading } = useGetTestToolsQuery({});
+
+  // 将 tools 数据转换为 Select 组件所需的格式
+  const options = toolData?.tools.map((tool) => ({
+    label: tool.nameZh,
+    value: tool.name,
+  }));
 
   const current = pageIndex;
 
@@ -33,34 +42,32 @@ const SelectTable = () => {
 
   return (
     <>
-      <Row justify='start' style={{ marginBottom: '20px' }}>
-        <SearchForm
-          onSubmit={async (value: FormValueType) => {
-            console.log(value);
-          }}
-          onCancel={() => {}}
-        />
+      <Row justify='space-between' style={{ marginBottom: '20px' }}>
+        <Space>
+          <Select style={{ width: '200px' }} multiple clearable loading={isToolLoading} options={options || []} />
+          <Input style={{ width: '160px' }} suffixIcon={<SearchIcon />} placeholder={'请输入镜像库名称'} />
+        </Space>
         <Button icon={<AddIcon />}>创建镜像库</Button>
       </Row>
       <Table
-        loading={isLoading}
-        data={data?.images || []}
+        loading={isImageLoading}
+        data={imageData?.images || []}
         columns={[
           {
-            title: '镜像库地址',
+            title: '镜像库名称',
             fixed: 'left',
             align: 'left',
             ellipsis: true,
             colKey: 'imageName',
           },
           {
-            title: '用户',
-            colKey: 'user',
-            width: 140,
+            title: '测试工具',
+            colKey: 'tool',
+            width: 160,
           },
           {
-            title: '个数',
-            width: 140,
+            title: '用户代码镜像数量',
+            width: 160,
             ellipsis: true,
             colKey: 'count',
             cell({ row }) {
@@ -74,7 +81,7 @@ const SelectTable = () => {
           {
             align: 'left',
             fixed: 'right',
-            width: 120,
+            width: 160,
             colKey: 'op',
             title: '操作',
             cell(record) {
@@ -97,10 +104,18 @@ const SelectTable = () => {
         rowKey='index'
         selectedRowKeys={selectedRowKeys}
         hover
+        empty={
+          <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200 }}>
+            <Space direction='vertical' align='center'>
+              <File1Icon size={'100px'} />
+              <div>暂无数据</div>
+            </Space>
+          </span>
+        }
         onSelectChange={onSelectChange}
         pagination={{
           pageSize,
-          total: data?.total,
+          total: imageData?.total,
           current,
           showJumper: true,
           // onCurrentChange(current, pageInfo) {

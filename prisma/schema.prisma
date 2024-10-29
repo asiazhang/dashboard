@@ -14,22 +14,52 @@ datasource db {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  nameEn    String      @unique
+  id        Int               @id @default(autoincrement())
+  nameEn    String            @unique
   name      String
   email     String
   TestImage TestImage[]
   TestTask  TestTask[]
+  projects  ProjectsOnUsers[]
+}
+
+model Project {
+  id        Int               @id @default(autoincrement())
+  name      String
+  userId    Int?
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  TestImage TestImage[]
+  TestTask  TestTask[]
+  users     ProjectsOnUsers[]
+}
+
+model ProjectsOnUsers {
+  projectId Int
+  userId    Int
+
+  project Project @relation(fields: [projectId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@id([projectId, userId])
 }
 
 model TestImage {
   id        Int      @id @default(autoincrement())
   name      String
-  user      User     @relation(fields: [userId], references: [id])
+  toolName  String
   count     Int
+  userId    Int
+  projectId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    Int
+
+  user    User    @relation(fields: [userId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+
+  @@unique([name, toolName])
 }
 
 model TestTask {
@@ -39,4 +69,6 @@ model TestTask {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    Int
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId Int
 }

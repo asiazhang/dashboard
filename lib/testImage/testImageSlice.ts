@@ -5,6 +5,7 @@ export interface TestImage {
   id: number;
   imageName: string;
   user: string;
+  toolName: string;
   count: number;
 }
 

@@ -16,11 +16,12 @@ export async function GET() {
 }
 
 async function getTestImags(): Promise<TestImage[]> {
-  const images = await prisma.testImage.findMany({ include: { user: true } });
+  const images = await prisma.testImage.findMany({ include: { project: true, user: true } });
 
   return images.map((item) => ({
     id: item.id,
     imageName: item.name,
+    toolName: item.toolName,
     user: item.user.name,
     count: item.count,
   }));
