@@ -4,7 +4,7 @@ import { MyLayoutProps } from '@/app/lib/common';
 import HeaderNav from '@/components/HeaderNav/HeaderNav';
 import Navigation from '@/components/Navigation/Navigation';
 import 'tdesign-react/dist/tdesign.css';
-import { Layout } from 'tdesign-react';
+import { Breadcrumb, Layout } from 'tdesign-react';
 import Style from './SharedLayout.module.css';
 
 const { Content, Aside } = Layout;
@@ -17,7 +17,10 @@ const SharedLayout = ({ children }: MyLayoutProps) => {
       </Aside>
       <Layout>
         <HeaderNav></HeaderNav>
-        <Content>{children}</Content>
+        <Content>
+          <Breadcrumb></Breadcrumb>
+          {children}
+        </Content>
       </Layout>
     </Layout>
   );

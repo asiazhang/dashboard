@@ -125,10 +125,10 @@ const SelectTable = () => {
   );
 };
 
-const testImagePage: React.FC = () => (
+const TestImagePage: React.FC = () => (
   <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
     <SelectTable />
   </div>
 );
 
-export default testImagePage;
+export default TestImagePage;

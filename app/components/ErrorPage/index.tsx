@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Light403Icon from '@/public/svg/assets-result-403.svg';
 import Light404Icon from '@/public/svg/assets-result-404.svg';
 import Light500Icon from '@/public/svg/assets-result-500.svg';
-import style from './index.module.less';
+// import style from './index.module.less';
 
 enum ECode {
   forbidden = 403,
