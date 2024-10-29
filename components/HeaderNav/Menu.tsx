@@ -6,19 +6,13 @@ import Style from './Menu.module.css';
 import MenuLogo from './MenuLogo';
 
 const { MenuItem, HeadMenu } = Menu;
-
-interface IMenuProps {
-  showLogo?: boolean;
-  showOperation?: boolean;
-}
-
 interface NaviMenu {
   label: string;
   icon: ReactElement;
   link: string;
 }
 
-const leftMenues: NaviMenu[] = [
+const leftMenus: NaviMenu[] = [
   {
     label: '镜像库',
     icon: <ListIcon />,
@@ -37,7 +31,7 @@ const leftMenues: NaviMenu[] = [
 ];
 
 const renderMenuItems = (router: NextRouter) => {
-  return leftMenues.map((item) => {
+  return leftMenus.map((item) => {
     const { label, icon, link } = item;
 
     return (
@@ -47,46 +41,32 @@ const renderMenuItems = (router: NextRouter) => {
     );
   });
 };
-
-/**
- * 顶部菜单
- */
-export const HeaderMenu = memo(() => {
+memo(() => {
   // const globalState = useAppSelector(selectGlobal);
   const router = useRouter();
   const [active, setActive] = useState<MenuValue>(router.pathname); // todo
 
   return (
-    <HeadMenu
-      expandType='popup'
-      style={{ marginBottom: 20 }}
-      value={active}
-      theme={'light'}
-      onChange={(v) => setActive(v)}
-    >
+    <HeadMenu value={active} theme={'light'} onChange={(v) => setActive(v)}>
       {renderMenuItems(router)}
     </HeadMenu>
   );
 });
-
 /**
  * 左侧菜单
  */
-export default memo((props: IMenuProps) => {
+export default memo(() => {
   const router = useRouter();
 
-  const bottomText = false ? `0.1.0` : `TDesign Starter 0.1.0`;
+  const bottomText = false ? `0.1.0` : `Dashboard 0.1.0`;
 
   return (
     <Menu
-      width='232px'
-      style={{ flexShrink: 0, height: '100%' }}
-      className={Style.menuPanel2}
+      className={Style.menuPanel}
       value={router.pathname}
-      theme={'light'}
-      collapsed={false}
-      operations={props.showOperation ? <div className={Style.menuTip}>{bottomText}</div> : undefined}
-      logo={props.showLogo ? <MenuLogo collapsed={false} /> : undefined}
+      theme={'dark'}
+      operations={<div className={Style.menuTip}>{bottomText}</div>}
+      logo={<MenuLogo collapsed={true} />}
     >
       {renderMenuItems(router)}
     </Menu>

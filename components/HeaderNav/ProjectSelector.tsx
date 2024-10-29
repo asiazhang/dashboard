@@ -13,6 +13,7 @@ export default memo(() => {
       autoWidth
       value={value}
       onChange={onChange}
+      borderless={true}
       options={[
         { label: '架构云', value: '1' },
         { label: '大数据', value: '2' },

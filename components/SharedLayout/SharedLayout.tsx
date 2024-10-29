@@ -1,7 +1,6 @@
 'use client';
 
 import { MyLayoutProps } from '@/app/lib/common';
-import FooterNav from '@/components/FooterNav/FooterNav';
 import HeaderNav from '@/components/HeaderNav/HeaderNav';
 import Navigation from '@/components/Navigation/Navigation';
 import 'tdesign-react/dist/tdesign.css';
@@ -13,15 +12,12 @@ const { Content, Aside } = Layout;
 const SharedLayout = ({ children }: MyLayoutProps) => {
   return (
     <Layout className={Style.panel}>
-      <HeaderNav></HeaderNav>
+      <Aside style={{ width: 'auto', minWidth: '64px', flex: 'none !important' }}>
+        <Navigation></Navigation>
+      </Aside>
       <Layout>
-        <Aside style={{ borderTop: '1px solid var(--component-border)' }}>
-          <Navigation></Navigation>
-        </Aside>
-        <Layout>
-          <Content>{children}</Content>
-          <FooterNav></FooterNav>
-        </Layout>
+        <HeaderNav></HeaderNav>
+        <Content>{children}</Content>
       </Layout>
     </Layout>
   );
