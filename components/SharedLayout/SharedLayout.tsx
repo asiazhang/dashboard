@@ -12,7 +12,7 @@ const { Content, Aside } = Layout;
 const SharedLayout = ({ children }: MyLayoutProps) => {
   return (
     <Layout className={Style.panel}>
-      <Aside>
+      <Aside style={{ width: 'auto', minWidth: '64px', flex: 'none !important' }}>
         <Navigation></Navigation>
       </Aside>
       <Layout>
