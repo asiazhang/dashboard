@@ -5,6 +5,7 @@ import React, { memo, useState } from 'react';
 import { Button, Input, Row, Table, Tooltip } from 'tdesign-react';
 
 import CommonStyle from '@/app/styles/common.module.css';
+import '@/app/styles/theme.css';
 import classnames from 'classnames';
 import { useRouter } from 'next/navigation';
 import { AddIcon, Edit1Icon, HistoryIcon, PlayCircleStrokeIcon, SearchIcon } from 'tdesign-icons-react';
@@ -15,7 +16,7 @@ const log: Logger<ILogObj> = new Logger();
 const TaskTable = () => {
   const pageSize = 20;
   const pageIndex = 1;
-  const { data, error, isLoading } = useGetTaskTasksQuery({ limit: pageSize, page: pageIndex });
+  const { data, error } = useGetTaskTasksQuery({ limit: pageSize, page: pageIndex });
   if (error) {
     log.warn(error);
   }
@@ -40,7 +41,6 @@ const TaskTable = () => {
         </Button>
       </Row>
       <Table
-        loading={isLoading}
         data={data?.tasks || []}
         columns={[
           {
