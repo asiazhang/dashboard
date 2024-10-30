@@ -1,27 +1,22 @@
 'use client';
 
-import { TestImage, useGetTestImagesQuery } from '@/lib/testImage/testImageSlice';
-import React, { useState } from 'react';
-import { Button, Input, Row, Select, Space, Table, Tag, Tooltip } from 'tdesign-react';
-import { ILogObj, Logger } from 'tslog';
-import '@/app/styles/theme.css';
 import CommonStyle from '@/app/styles/common.module.css';
+import '@/app/styles/theme.css';
+import { TestImage, useGetTestImagesQuery } from '@/lib/testImage/testImageSlice';
 import { useGetTestToolsQuery } from '@/lib/testTool/testToolSlice';
 import classnames from 'classnames';
 import Link from 'next/link';
+import { useState } from 'react';
 import { AddIcon, DeleteIcon, Edit1Icon, File1Icon, SearchIcon } from 'tdesign-icons-react';
-import { TdOptionProps } from 'tdesign-react/lib';
+import { Button, Input, Row, Select, Space, Table, Tag, TdOptionProps, Tooltip } from 'tdesign-react';
+import { ILogObj, Logger } from 'tslog';
 
 const log: Logger<ILogObj> = new Logger();
 
-const SelectTable = () => {
+const TestImagePage = () => {
   const pageSize = 20;
   const pageIndex = 1;
-  const {
-    data: imageData,
-    error: imageError,
-    isLoading: isImageLoading,
-  } = useGetTestImagesQuery({ limit: pageSize, page: pageIndex });
+  const { data: imageData, error: imageError } = useGetTestImagesQuery({ limit: pageSize, page: pageIndex });
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([0, 1]);
 
   if (imageError) {
@@ -41,8 +36,6 @@ const SelectTable = () => {
   }));
   options?.unshift({ label: '全选', checkAll: true });
 
-  const current = pageIndex;
-
   function onSelectChange(value: (string | number)[]) {
     setSelectedRowKeys(value);
   }
@@ -56,7 +49,7 @@ const SelectTable = () => {
   }
 
   return (
-    <>
+    <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
       <Row justify='space-between' style={{ marginBottom: '20px' }}>
         <Space>
           <Select
@@ -72,14 +65,12 @@ const SelectTable = () => {
         <Button icon={<AddIcon />}>创建镜像库</Button>
       </Row>
       <Table
-        loading={isImageLoading}
         data={imageData?.images || []}
         columns={[
           {
-            title: '镜像库名称',
             fixed: 'left',
             align: 'left',
-            ellipsis: true,
+            title: '镜像库名称',
             colKey: 'imageName',
           },
           {
@@ -89,9 +80,8 @@ const SelectTable = () => {
           },
           {
             title: '用户代码镜像数量',
-            width: 160,
-            ellipsis: true,
             colKey: 'count',
+            width: 160,
             cell({ row }) {
               return (
                 <Tag theme={row.count === 0 ? 'warning' : 'primary'} variant='light'>
@@ -133,9 +123,8 @@ const SelectTable = () => {
             },
           },
         ]}
-        rowKey='index'
+        rowKey='id'
         selectedRowKeys={selectedRowKeys}
-        hover
         empty={
           <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200 }}>
             <Space direction='vertical' align='center'>
@@ -147,37 +136,9 @@ const SelectTable = () => {
           </span>
         }
         onSelectChange={onSelectChange}
-        pagination={{
-          pageSize,
-          total: imageData?.total,
-          current,
-          showJumper: true,
-          // onCurrentChange(current, pageInfo) {
-          //   dispatch(
-          //     getList({
-          //       pageSize: pageInfo.pageSize,
-          //       current: pageInfo.current,
-          //     }),
-          //   );
-          // },
-          // onPageSizeChange(size) {
-          //   dispatch(
-          //     getList({
-          //       pageSize: size,
-          //       current: 1,
-          //     }),
-          //   );
-          // },
-        }}
       />
-    </>
+    </div>
   );
 };
-
-const TestImagePage: React.FC = () => (
-  <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
-    <SelectTable />
-  </div>
-);
 
 export default TestImagePage;
