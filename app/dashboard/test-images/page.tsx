@@ -2,7 +2,7 @@
 
 import { TestImage, useGetTestImagesQuery } from '@/lib/testImage/testImageSlice';
 import React, { useState } from 'react';
-import { Button, Input, PrimaryTableCellParams, Row, Select, Space, Table, Tag, Tooltip } from 'tdesign-react';
+import { Button, Input, Row, Select, Space, Table, Tag, Tooltip } from 'tdesign-react';
 import { ILogObj, Logger } from 'tslog';
 
 import CommonStyle from '@/app/styles/common.module.css';
