@@ -60,7 +60,7 @@ const SelectTable = () => {
       <Row justify='space-between' style={{ marginBottom: '20px' }}>
         <Space>
           <Select
-            style={{ width: '250px' }}
+            style={{ width: '300px' }}
             label='测试工具'
             multiple
             clearable
