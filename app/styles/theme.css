@@ -16,7 +16,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-:root,:root[theme-mode="light"] {
+html:root,html:root[theme-mode="light"] {
   --brand-main: var(--td-brand-color-10);
   --td-brand-color-light: var(--td-brand-color-1);
   --td-brand-color-focus: var(--td-brand-color-2);
@@ -269,7 +269,7 @@ code {
   /* end 尺寸配置 */
 }
 
-:root[theme-mode="dark"] {
+html:root[theme-mode="dark"] {
   --brand-main: var(--td-brand-color-6);
   --td-brand-color-light: var(--td-brand-color-1);
   --td-brand-color-focus: var(--td-brand-color-2);
