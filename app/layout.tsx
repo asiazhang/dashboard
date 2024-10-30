@@ -1,4 +1,3 @@
-import 'tdesign-react/dist/tdesign.css';
 import { MyLayoutProps } from '@/app/lib/common';
 import SharedLayout from '@/components/SharedLayout/SharedLayout';
 import { StoreProvider } from './StoreProvider';

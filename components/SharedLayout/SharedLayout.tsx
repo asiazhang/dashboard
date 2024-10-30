@@ -3,7 +3,6 @@
 import { MyLayoutProps } from '@/app/lib/common';
 import HeaderNav from '@/components/HeaderNav/HeaderNav';
 import Navigation from '@/components/Navigation/Navigation';
-import 'tdesign-react/dist/tdesign.css';
 import { Layout } from 'tdesign-react';
 import Style from './SharedLayout.module.css';
 
