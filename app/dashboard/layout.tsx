@@ -1,5 +1,3 @@
-'use client';
-
 import { MyLayoutProps } from '@/app/lib/common';
 
 import 'tdesign-react/dist/tdesign.css';
