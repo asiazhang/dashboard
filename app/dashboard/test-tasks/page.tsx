@@ -2,7 +2,7 @@
 
 import { useGetTaskTasksQuery } from '@/lib/testTask/testTaskSlice';
 import React, { memo, useState } from 'react';
-import { Button, Input, Row, Table, Tooltip } from 'tdesign-react';
+import { Button, Input, Radio, Row, Space, Table, Tooltip } from 'tdesign-react';
 
 import CommonStyle from '@/app/styles/common.module.css';
 import '@/app/styles/theme.css';
@@ -34,10 +34,16 @@ const TaskTable = () => {
 
   return (
     <>
-      <Row justify='start' style={{ marginBottom: '20px' }}>
-        <Input style={{ width: '160px' }} suffixIcon={<SearchIcon />} placeholder={'请输入任务名称'} />
-        <Button icon={<AddIcon />} onClick={() => router.push('/dashboard/new-task')}>
-          创建测试任务
+      <Row justify='space-between' style={{ marginBottom: '20px' }}>
+        <Space>
+          <Radio.Group>
+            <Radio.Button value={'my'}>我的</Radio.Button>
+            <Radio.Button value={'all'}>全部</Radio.Button>
+          </Radio.Group>
+          <Input style={{ width: '160px' }} suffixIcon={<SearchIcon />} placeholder={'请输入任务名称'} />
+        </Space>
+        <Button icon={<AddIcon />} onClick={() => router.push('/dashboard/test-tasks/new')}>
+          创建任务
         </Button>
       </Row>
       <Table
@@ -48,14 +54,11 @@ const TaskTable = () => {
             width: 120,
             fixed: 'left',
             align: 'left',
-            ellipsis: true,
             colKey: 'id',
           },
           {
             title: '任务名称',
             colKey: 'taskName',
-            fixed: 'left',
-            align: 'left',
             ellipsis: true,
           },
           {
@@ -69,7 +72,6 @@ const TaskTable = () => {
             width: 200,
           },
           {
-            align: 'left',
             fixed: 'right',
             width: 160,
             colKey: 'op',
@@ -77,42 +79,46 @@ const TaskTable = () => {
             cell(record) {
               return (
                 <>
-                  <Tooltip content='启动'>
-                    <Button
-                      shape='circle'
-                      icon={<PlayCircleStrokeIcon />}
-                      onClick={() => {
-                        rehandleClickOp(record);
-                      }}
-                    ></Button>
-                  </Tooltip>
+                  <Space>
+                    <Tooltip content='启动任务'>
+                      <Button
+                        size='small'
+                        variant='text'
+                        icon={<PlayCircleStrokeIcon />}
+                        onClick={() => {
+                          rehandleClickOp(record);
+                        }}
+                      ></Button>
+                    </Tooltip>
 
-                  <Tooltip content='执行记录'>
-                    <Button
-                      shape='circle'
-                      icon={<HistoryIcon />}
-                      onClick={() => {
-                        rehandleClickOp(record);
-                      }}
-                    ></Button>
-                  </Tooltip>
-                  <Tooltip content='编辑'>
-                    <Button
-                      shape='circle'
-                      icon={<Edit1Icon />}
-                      onClick={() => {
-                        rehandleClickOp(record);
-                      }}
-                    ></Button>
-                  </Tooltip>
+                    <Tooltip content='执行记录'>
+                      <Button
+                        size='small'
+                        variant='text'
+                        icon={<HistoryIcon />}
+                        onClick={() => {
+                          rehandleClickOp(record);
+                        }}
+                      ></Button>
+                    </Tooltip>
+                    <Tooltip content='编辑任务'>
+                      <Button
+                        size='small'
+                        variant='text'
+                        icon={<Edit1Icon />}
+                        onClick={() => {
+                          rehandleClickOp(record);
+                        }}
+                      ></Button>
+                    </Tooltip>
+                  </Space>
                 </>
               );
             },
           },
         ]}
-        rowKey='index'
+        rowKey='id'
         selectedRowKeys={selectedRowKeys}
-        hover
         onSelectChange={onSelectChange}
         // pagination={{
         //   pageSize,
