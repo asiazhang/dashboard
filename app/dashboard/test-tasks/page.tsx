@@ -2,13 +2,13 @@
 
 import { useGetTaskTasksQuery } from '@/lib/testTask/testTaskSlice';
 import React, { memo, useState } from 'react';
-import { Button, Row, Table, Tooltip } from 'tdesign-react';
-import SearchForm, { FormValueType } from './components/SearchForm';
+import { Button, Input, Row, Table, Tooltip } from 'tdesign-react';
 
 import CommonStyle from '@/app/styles/common.module.css';
+import '@/app/styles/theme.css';
 import classnames from 'classnames';
 import { useRouter } from 'next/navigation';
-import { AddIcon, Edit1Icon, HistoryIcon, PlayCircleStrokeIcon } from 'tdesign-icons-react';
+import { AddIcon, Edit1Icon, HistoryIcon, PlayCircleStrokeIcon, SearchIcon } from 'tdesign-icons-react';
 import { ILogObj, Logger } from 'tslog';
 
 const log: Logger<ILogObj> = new Logger();
@@ -16,7 +16,7 @@ const log: Logger<ILogObj> = new Logger();
 const TaskTable = () => {
   const pageSize = 20;
   const pageIndex = 1;
-  const { data, error, isLoading } = useGetTaskTasksQuery({ limit: pageSize, page: pageIndex });
+  const { data, error } = useGetTaskTasksQuery({ limit: pageSize, page: pageIndex });
   if (error) {
     log.warn(error);
   }
@@ -35,18 +35,12 @@ const TaskTable = () => {
   return (
     <>
       <Row justify='start' style={{ marginBottom: '20px' }}>
-        <SearchForm
-          onSubmit={async (value: FormValueType) => {
-            console.log(value);
-          }}
-          onCancel={() => {}}
-        />
+        <Input style={{ width: '160px' }} suffixIcon={<SearchIcon />} placeholder={'请输入任务名称'} />
         <Button icon={<AddIcon />} onClick={() => router.push('/dashboard/new-task')}>
           创建测试任务
         </Button>
       </Row>
       <Table
-        loading={isLoading}
         data={data?.tasks || []}
         columns={[
           {

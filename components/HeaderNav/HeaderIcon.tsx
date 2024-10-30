@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 import { Icon, PoweroffIcon, SettingIcon, UserCircleIcon } from 'tdesign-icons-react';

@@ -1,11 +1,12 @@
 'use client';
 
+import { useGetTaskRecordsQuery } from '@/lib/testRecord/testRecordSlice';
 import prettyMilliseconds from 'pretty-ms';
 import React, { memo, useState } from 'react';
 import { Button, Progress, Select, StatusEnum, Table, Tag, Tooltip } from 'tdesign-react';
-import { useGetTaskRecordsQuery } from '@/lib/testRecord/testRecordSlice';
 
 import CommonStyle from '@/app/styles/common.module.css';
+import '@/app/styles/theme.css';
 import classnames from 'classnames';
 import { FilePasteIcon } from 'tdesign-icons-react';
 import { ILogObj, Logger } from 'tslog';
@@ -47,7 +48,7 @@ const statusOptions = [
 const TestRecordsTable = () => {
   const pageSize = 20;
   const pageIndex = 1;
-  const { data, error, isLoading } = useGetTaskRecordsQuery({ limit: pageSize, page: pageIndex });
+  const { data, error } = useGetTaskRecordsQuery({ limit: pageSize, page: pageIndex });
   if (error) {
     log.warn(error);
   }
@@ -66,7 +67,6 @@ const TestRecordsTable = () => {
     <>
       <Select multiple label='状态' autoWidth={true} options={statusOptions}></Select>
       <Table
-        loading={isLoading}
         data={data?.records || []}
         columns={[
           {

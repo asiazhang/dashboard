@@ -1,4 +1,6 @@
 // 用户切换项目菜单
+'use client';
+
 import { memo, useState } from 'react';
 import { Select, SelectValue } from 'tdesign-react';
 
