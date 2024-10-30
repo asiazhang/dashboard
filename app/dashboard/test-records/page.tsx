@@ -169,10 +169,10 @@ const TestRecordsTable = () => {
   );
 };
 
-const selectPage: React.FC = () => (
+const TestRecordPage: React.FC = () => (
   <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
     <TestRecordsTable />
   </div>
 );
 
-export default memo(selectPage);
+export default memo(TestRecordPage);

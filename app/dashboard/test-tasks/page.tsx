@@ -147,10 +147,10 @@ const TaskTable = () => {
   );
 };
 
-const selectPage: React.FC = () => (
+const TestTaskPage: React.FC = () => (
   <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
     <TaskTable />
   </div>
 );
 
-export default memo(selectPage);
+export default memo(TestTaskPage);

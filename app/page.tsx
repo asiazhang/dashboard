@@ -1,6 +1,6 @@
 'use client';
 
-import './styles/index.css';
+import './styles/theme.css';
 
 export default function indexPage() {
   return (

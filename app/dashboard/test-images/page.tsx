@@ -1,25 +1,45 @@
 'use client';
 
-import { useGetTestImagesQuery } from '@/lib/testImage/testImageSlice';
+import { TestImage, useGetTestImagesQuery } from '@/lib/testImage/testImageSlice';
 import React, { useState } from 'react';
-import { Button, Row, Table, Tag } from 'tdesign-react';
+import { Button, Input, Row, Select, Space, Table, Tag, Tooltip } from 'tdesign-react';
 import { ILogObj, Logger } from 'tslog';
-import SearchForm, { FormValueType } from './components/SearchForm';
 
 import CommonStyle from '@/app/styles/common.module.css';
+import { useGetTestToolsQuery } from '@/lib/testTool/testToolSlice';
 import classnames from 'classnames';
-import { AddIcon } from 'tdesign-icons-react';
+import Link from 'next/link';
+import { AddIcon, DeleteIcon, Edit1Icon, File1Icon, SearchIcon } from 'tdesign-icons-react';
+import { TdOptionProps } from 'tdesign-react/lib';
 
 const log: Logger<ILogObj> = new Logger();
 
 const SelectTable = () => {
   const pageSize = 20;
   const pageIndex = 1;
-  const { data, error, isLoading } = useGetTestImagesQuery({ limit: pageSize, page: pageIndex });
+  const {
+    data: imageData,
+    error: imageError,
+    isLoading: isImageLoading,
+  } = useGetTestImagesQuery({ limit: pageSize, page: pageIndex });
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([0, 1]);
 
-  log.info(`error is ${error}`);
-  log.info(`data is ${data}`);
+  if (imageError) {
+    log.error(imageError);
+  }
+
+  const { data: toolData, error: toolError, isLoading: isToolLoading } = useGetTestToolsQuery({});
+
+  if (toolError) {
+    log.error(toolError);
+  }
+
+  // 将 tools 数据转换为 Select 组件所需的格式
+  const options: Array<TdOptionProps> | undefined = toolData?.tools.map((tool) => ({
+    label: tool.nameZh,
+    value: tool.name,
+  }));
+  options?.unshift({ label: '全选', checkAll: true });
 
   const current = pageIndex;
 
@@ -27,68 +47,87 @@ const SelectTable = () => {
     setSelectedRowKeys(value);
   }
 
-  function rehandleClickOp(record: any) {
-    console.log(record);
+  function onEditTestImage(record: any) {
+    log.debug(record);
+  }
+
+  function onDeleteTestImage(record: TestImage) {
+    log.debug(record);
   }
 
   return (
     <>
-      <Row justify='start' style={{ marginBottom: '20px' }}>
-        <SearchForm
-          onSubmit={async (value: FormValueType) => {
-            console.log(value);
-          }}
-          onCancel={() => {}}
-        />
+      <Row justify='space-between' style={{ marginBottom: '20px' }}>
+        <Space>
+          <Select
+            style={{ width: '300px' }}
+            label='测试工具'
+            multiple
+            clearable
+            loading={isToolLoading}
+            options={options || []}
+          ></Select>
+          <Input style={{ width: '160px' }} suffixIcon={<SearchIcon />} placeholder={'请输入镜像库名称'} />
+        </Space>
         <Button icon={<AddIcon />}>创建镜像库</Button>
       </Row>
       <Table
-        loading={isLoading}
-        data={data?.images || []}
+        loading={isImageLoading}
+        data={imageData?.images || []}
         columns={[
           {
-            title: '镜像库地址',
+            title: '镜像库名称',
             fixed: 'left',
             align: 'left',
             ellipsis: true,
             colKey: 'imageName',
           },
           {
-            title: '用户',
-            colKey: 'user',
-            width: 140,
+            title: '测试工具',
+            colKey: 'toolName',
+            width: 200,
           },
           {
-            title: '个数',
-            width: 140,
+            title: '用户代码镜像数量',
+            width: 160,
             ellipsis: true,
             colKey: 'count',
             cell({ row }) {
               return (
-                <Tag theme='success' variant='light'>
+                <Tag theme={row.count === 0 ? 'warning' : 'primary'} variant='light'>
                   {row.count.toString()}
                 </Tag>
               );
             },
           },
           {
-            align: 'left',
             fixed: 'right',
-            width: 120,
+            width: 160,
             colKey: 'op',
             title: '操作',
-            cell(record) {
+            cell({ row }) {
               return (
                 <>
-                  <Button
-                    theme='primary'
-                    variant='text'
-                    onClick={() => {
-                      rehandleClickOp(record);
-                    }}
-                  >
-                    编辑
-                  </Button>
+                  <Space>
+                    <Tooltip content='编辑'>
+                      <Button
+                        size='small'
+                        variant='text'
+                        icon={<Edit1Icon />}
+                        onClick={() => {
+                          onEditTestImage(row);
+                        }}
+                      ></Button>
+                    </Tooltip>
+                    <Tooltip content='删除'>
+                      <Button
+                        size='small'
+                        variant='text'
+                        icon={<DeleteIcon />}
+                        onClick={() => onDeleteTestImage(row)}
+                      ></Button>
+                    </Tooltip>
+                  </Space>
                 </>
               );
             },
@@ -97,10 +136,20 @@ const SelectTable = () => {
         rowKey='index'
         selectedRowKeys={selectedRowKeys}
         hover
+        empty={
+          <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200 }}>
+            <Space direction='vertical' align='center'>
+              <File1Icon size={'100px'} />
+              <div>
+                暂无数据，<Link href='/test-images/new'>创建镜像库</Link>
+              </div>
+            </Space>
+          </span>
+        }
         onSelectChange={onSelectChange}
         pagination={{
           pageSize,
-          total: data?.total,
+          total: imageData?.total,
           current,
           showJumper: true,
           // onCurrentChange(current, pageInfo) {
@@ -125,10 +174,10 @@ const SelectTable = () => {
   );
 };
 
-const testImagePage: React.FC = () => (
+const TestImagePage: React.FC = () => (
   <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
     <SelectTable />
   </div>
 );
 
-export default testImagePage;
+export default TestImagePage;

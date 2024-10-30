@@ -111,10 +111,10 @@ const NewTask = () => {
   );
 };
 
-const newTaskPage: React.FC = () => (
+const NewTaskPage: React.FC = () => (
   <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
     <NewTask />
   </div>
 );
 
-export default memo(newTaskPage);
+export default memo(NewTaskPage);
