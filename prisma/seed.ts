@@ -131,46 +131,52 @@ async function seedUsers() {
 
 async function seedTestImages() {
   log.debug('seeding test image data');
-  await prisma.testImage.deleteMany({
-    where: {
-      id: {
-        in: [1, 2, 3],
-      },
-    },
-  });
-  const image1 = await prisma.testImage.create({
-    data: {
+
+  const image1 = await prisma.testImage.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
       name: 'tcr.tencent.cloud.com/party/taas/native/demo',
-      toolName: 'pytest',
+      tool: 'pytest',
+      toolName: 'Pytest自动化测试工具',
       userId: 1,
       count: 5,
       projectId: 1,
     },
   });
-  const image2 = await prisma.testImage.create({
-    data: {
+  const image2 = await prisma.testImage.upsert({
+    where: { id: 2 },
+    update: {},
+    create: {
       name: 'tcr.tencent.cloud.com/party/taas/fastly',
       userId: 3,
       count: 7,
-      toolName: 'ginkgo',
+      tool: 'ginkgo',
+      toolName: 'Ginkgo自动化测试工具',
       projectId: 1,
     },
   });
-  const image3 = await prisma.testImage.create({
-    data: {
+  const image3 = await prisma.testImage.upsert({
+    where: { id: 3 },
+    update: {},
+    create: {
       name: 'tcr.tencent.cloud.com/party/taas/pytest',
       userId: 1,
       count: 4,
-      toolName: 'pytest',
+      tool: 'pytest',
+      toolName: 'Pytest自动化测试工具',
       projectId: 1,
     },
   });
-  const image4 = await prisma.testImage.create({
-    data: {
+  const image4 = await prisma.testImage.upsert({
+    where: { id: 4 },
+    update: {},
+    create: {
       name: 'tcr.tencent.cloud.com/party/taas/jest-demo',
       userId: 2,
       count: 0,
-      toolName: 'jest',
+      tool: 'jest',
+      toolName: 'Jest自动化测试工具',
       projectId: 1,
     },
   });
