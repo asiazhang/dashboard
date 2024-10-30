@@ -4,6 +4,7 @@ import { TestImage, useGetTestImagesQuery } from '@/lib/testImage/testImageSlice
 import React, { useState } from 'react';
 import { Button, Input, Row, Select, Space, Table, Tag, Tooltip } from 'tdesign-react';
 import { ILogObj, Logger } from 'tslog';
+import '@/app/styles/theme.css';
 import CommonStyle from '@/app/styles/common.module.css';
 import { useGetTestToolsQuery } from '@/lib/testTool/testToolSlice';
 import classnames from 'classnames';
